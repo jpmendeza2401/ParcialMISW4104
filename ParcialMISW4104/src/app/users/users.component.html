@@ -1,0 +1,50 @@
+<main class="max-w-[1280px] mx-auto px-gutter py-lg pb-32">
+  <div class="mb-lg">
+    <h2 class="font-h1 text-h1 text-on-surface mb-2">Explorador de Usuarios</h2>
+    <p class="font-body-sm text-body-sm text-on-surface-variant">Directorio técnico de colaboradores y desarrolladores
+      del sistema.</p>
+  </div>
+  <!-- User List Section -->
+  <div class="bg-surface-container-low rounded-lg border border-outline-variant overflow-hidden">
+    <!-- Table Header -->
+    <div
+      class="grid grid-cols-12 px-md py-sm bg-surface-container border-b border-outline-variant font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">
+      <div class="col-span-6 lg:col-span-5">Nombre</div>
+      <div class="col-span-6 lg:col-span-7">Correo</div>
+    </div>
+    <!-- User Entries -->
+    <div class="divide-y divide-outline-variant">
+      <div 
+        *ngFor="let user of users$ | async"
+        class="grid grid-cols-12 px-md py-md hover:bg-surface-container-high transition-colors items-center group"
+      >
+        <div class="col-span-6 lg:col-span-5 flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary text-[20px]">
+            {{ user.role === 'admin' ? 'shield' : 'group' }}
+          </span>
+          <span class="font-body-lg text-body-lg text-on-surface font-semibold">
+            {{ user.name }}
+          </span>
+        </div>
+        <div class="col-span-6 lg:col-span-7">
+          <span class="font-code text-code text-primary-fixed-dim bg-primary-container/10 px-2 py-1 rounded">
+            {{ user.email }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer Info -->
+  <div class="mt-lg flex justify-between items-center text-on-surface-variant font-body-sm">
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+      <span>
+      Mostrando {{ (users$ | async)?.length || 0 }} usuarios activos
+    </span>
+    </div>
+    <div class="flex gap-4">
+      <button class="hover:text-primary transition-colors cursor-pointer">Siguiente</button>
+      <button class="text-outline cursor-not-allowed">Anterior</button>
+    </div>
+  </div>
+</main>
