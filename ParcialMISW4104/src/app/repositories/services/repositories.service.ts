@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Repository } from '../models/repositories';
 import { environment } from '../../../environments/environment.development';
 
@@ -16,4 +16,9 @@ export class RepositoriesService {
   getRepositories(): Observable<Repository[]> {
     return this.http.get<Repository[]>(this.apiUrl);
   }
+  getRepositoriesById(id: number) {
+  return this.getRepositories().pipe(
+    map(repos => repos.find(r => r.id === id))
+  );
+}
 }
